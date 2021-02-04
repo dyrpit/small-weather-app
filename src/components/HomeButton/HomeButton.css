@@ -1,0 +1,16 @@
+.home-button {
+	height: 3rem;
+	margin-left: 2rem;
+	color: white;
+	font-size: 2rem;
+	font-family: 'Open Sans', sans-serif;
+	border: none;
+	border-radius: 50%;
+	background-color: transparent;
+	align-self: flex-start;
+	transition: 0.3s;
+}
+
+.home-button:hover {
+	transform: translate(-10%);
+}

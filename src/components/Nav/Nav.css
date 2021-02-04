@@ -1,0 +1,11 @@
+nav ul {
+	display: flex;
+	list-style-type: none;
+	justify-content: space-around;
+	padding: 1rem;
+}
+
+.nav-item img {
+	height: 3.5rem;
+	margin: 1rem;
+}

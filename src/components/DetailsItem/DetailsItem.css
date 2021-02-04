@@ -1,0 +1,33 @@
+.details-item-wrapper {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	margin: 1rem 1rem 0 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.details-item-wrapper img {
+	height: 4rem;
+	margin-right: 1.5rem;
+}
+
+.details-description {
+	display: flex;
+	width: 100%;
+}
+
+.details-description span {
+	font-size: 2rem;
+	font-weight: 100;
+	padding-right: 2rem;
+	text-transform: capitalize;
+}
+
+.details-description p {
+	font-weight: 700;
+	flex-grow: 1;
+	text-align: end;
+	padding-right: 1rem;
+	font-size: 2rem;
+}

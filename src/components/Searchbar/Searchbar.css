@@ -1,0 +1,35 @@
+form {
+	padding: 1rem;
+	text-align: center;
+}
+
+input {
+	width: 85%;
+	height: 3rem;
+	border: 1px solid white;
+	border-radius: 2rem;
+	background-color: transparent;
+	color: white;
+	outline: none;
+	padding: 0 2rem;
+	transition: 0.3s;
+}
+
+::placeholder {
+	color: white;
+}
+
+input:focus {
+	box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.3);
+}
+
+form button {
+	width: 10%;
+	height: 3rem;
+	margin-left: 5%;
+	font-size: 1.8rem;
+	background-color: transparent;
+	border: none;
+	color: white;
+	outline: none;
+}
