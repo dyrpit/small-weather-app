@@ -22,7 +22,7 @@ const Nav = () => {
 					</Link>
 				</li>
 				<li className='nav-item'>
-					<Link>
+					<Link to='/alerts'>
 						<img src={alert} alt='alert menu icon' />
 					</Link>
 				</li>

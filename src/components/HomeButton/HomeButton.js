@@ -6,13 +6,13 @@ import './HomeButton.css';
 const HomeButton = () => {
 	const history = useHistory();
 
-	const handleGoBackClick = () => {
-		history.goBack();
+	const handleGoHomeClick = () => {
+		history.push('/');
 	};
 
 	return (
-		<button className='home-button' onClick={handleGoBackClick}>
-			<i class='fas fa-arrow-left'></i> Home
+		<button className='home-button' onClick={handleGoHomeClick}>
+			<i className='fas fa-arrow-left'></i> Home
 		</button>
 	);
 };

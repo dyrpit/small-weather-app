@@ -13,7 +13,7 @@ const DetailsPage = (props) => {
 		<Container>
 			<HomeButton />
 			{detailsArray.map(([title, value]) => (
-				<DetailsItem value={value} title={title} />
+				<DetailsItem key={title} value={value} title={title} />
 			))}
 		</Container>
 	);

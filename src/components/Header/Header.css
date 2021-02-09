@@ -8,12 +8,12 @@
 	text-align: center;
 }
 
-.city-container p:first-of-type {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
 .city-container p:last-of-type {
 	text-transform: capitalize;
 	font-size: 1.4rem;
+}
+
+.city-container p:first-of-type {
+	font-size: 3rem;
+	margin-bottom: 1rem;
 }

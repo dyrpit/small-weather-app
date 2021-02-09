@@ -1,7 +1,10 @@
 import React from 'react';
+
+import Loading from '../Loading/Loading';
+
 import './Header.css';
 
-const Header = ({ city, err }) => {
+const Header = ({ city, err, isLoading }) => {
 	const day = new Date().toLocaleDateString(undefined, {
 		weekday: 'short',
 	});
@@ -11,17 +14,19 @@ const Header = ({ city, err }) => {
 		minute: '2-digit',
 	});
 
-	return err ? (
-		<div className='weather-container'>
-			<p className='warn'>City not found</p>
-		</div>
-	) : (
+	return (
 		<header className='weather-container'>
 			<div className='city-container'>
-				<p>{city}</p>
-				<p>
-					{day}, {time}
-				</p>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<>
+						<p>{err || city}</p>
+						<p>
+							{day}, {time}
+						</p>
+					</>
+				)}
 			</div>
 		</header>
 	);

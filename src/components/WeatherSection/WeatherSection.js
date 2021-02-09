@@ -2,7 +2,7 @@ import React from 'react';
 
 import './WeatherSection.css';
 
-import { getProperImage } from '../../utils/getProperImage';
+import { getProperImage } from '../../utils/getImage';
 import Container from '../Container/Container';
 
 const WeatherSection = ({ conditions, max, min, temp, sunrise, sunset, weather }) => {

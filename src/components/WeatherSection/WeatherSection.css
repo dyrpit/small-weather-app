@@ -52,3 +52,41 @@
 .max-min-temp-wrapper p:last-of-type {
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
+
+@media (min-width: 450px) {
+	.weather-type-section {
+		justify-content: center;
+	}
+
+	.weather-type-img {
+		flex-grow: 0;
+		padding-right: 2rem;
+	}
+
+	.weather-type-section p {
+		flex-grow: 0;
+	}
+
+	.max-min-temp-wrapper {
+		padding-right: 6rem;
+	}
+}
+
+/* @media (min-width: 640px) {
+	.weather-type-section {
+		justify-content: center;
+	}
+
+	.weather-type-img {
+		flex-grow: 0;
+		padding-right: 2rem;
+	}
+
+	.weather-type-section p {
+		flex-grow: 0;
+	}
+
+	.max-min-temp-wrapper {
+		padding-right: 6rem;
+	}
+} */
