@@ -6,10 +6,34 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--thunderstorm: rgb(197, 139, 107);
+	--snow: rgb(202, 195, 197);
+	--clearDay: rgb(101, 187, 227);
+	--clearNight: rgb(125, 114, 195);
+	--clouds: rgb(153, 180, 193);
+	--rain: rgb(70, 158, 179);
+	--sand: rgb(255, 196, 105);
+	--tornado: rgb(225, 179, 152);
+	--mist: rgb(90, 102, 136);
+	--ash: rgb(33, 18, 22);
+	--light: #fff;
+	--dark: #000;
+	--font-size-xs: 0.5rem;
+	--font-size-s: 1rem;
+	--font-size-sm: 1.5rem;
+	--font-size-m: 2rem;
+	--font-size-sl: 2.5rem;
+	--font-size-l: 3rem;
+	--font-size-xl: 4rem;
+	--font-size-xxl: 6rem;
+}
+
 html {
-	height: 100vh;
+	min-height: 100vh;
 	width: 100vw;
-	font-size: 10px;
+	font-size: 16px;
+	line-height: 1.5;
 	color: white;
 }
 

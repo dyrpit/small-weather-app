@@ -1,16 +1,25 @@
 .home-button {
-	height: 3rem;
+	height: 2rem;
 	margin-left: 2rem;
-	color: white;
-	font-size: 2rem;
+	color: inherit;
+	font-size: var(--font-size-s);
 	font-family: 'Open Sans', sans-serif;
 	border: none;
 	border-radius: 50%;
 	background-color: transparent;
 	align-self: flex-start;
+	outline: none;
 	transition: 0.3s;
 }
 
 .home-button:hover {
-	transform: translate(-10%);
+	transform: translateX(-10%);
+}
+
+@media (min-width: 640px) {
+	.home-button {
+		height: 3rem;
+		font-size: var(--font-size-sm);
+		margin-bottom: 2rem;
+	}
 }

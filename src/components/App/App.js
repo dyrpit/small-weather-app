@@ -9,14 +9,16 @@ import Nav from '../Nav/Nav';
 import Searchbar from '../Searchbar/Searchbar';
 import WeatherSection from '../WeatherSection/WeatherSection';
 
-import { fetchWeather } from '../../utils/fetch';
-import { getBackgroundImage } from '../../utils/getBackgroundImage';
+// import { ThemeContext, colors } from '../../context/themeContext';
+import { fetchWeather, fetchWeatherHourly } from '../../utils/fetch';
 import { getProperCondition } from '../../utils/getProperConditon';
 
 import './App.css';
 
 class App extends Component {
 	//TODO1: add debouce to reduce input onchange refresh, minimize child re-renders
+	//TODO2: add theme to switch for dark mode
+	//TODO3: add prop types
 	state = {
 		value: '',
 		temp: '',
@@ -35,6 +37,7 @@ class App extends Component {
 		lat: '',
 		lng: '',
 		isLoading: false,
+		hourlyWeather: null,
 	};
 
 	handleInputChange = (e) => {
@@ -51,8 +54,6 @@ class App extends Component {
 		this.setState({ isLoading: true });
 		try {
 			const weatherData = await fetchWeather(location, lat, lng);
-
-			this.setState({ isLoading: false });
 
 			if (weatherData) {
 				const {
@@ -81,7 +82,22 @@ class App extends Component {
 					lng,
 					lat,
 					err: false,
+					width: null,
+					hourlyWeather: null,
 				});
+
+				const hourlyWeatherData = await fetchWeatherHourly(
+					weatherData.coord.lat,
+					weatherData.coord.lon
+				);
+
+				this.setState({ isLoading: false });
+
+				if (hourlyWeatherData) {
+					this.setState({
+						hourlyWeather: hourlyWeatherData,
+					});
+				}
 			}
 		} catch (e) {
 			this.setState({ err: e.message, isLoading: false });
@@ -98,26 +114,29 @@ class App extends Component {
 		const {
 			city,
 			conditions,
+			cloudy,
 			err,
 			humidity,
 			lat,
 			lng,
 			maxTemp,
 			minTemp,
+			pressure,
 			sunrise,
 			sunset,
 			temp,
 			value,
 			wind,
 			isLoading,
+			hourlyWeather,
 		} = this.state;
 
 		const properCondition = getProperCondition(conditions, sunrise, sunset);
-		getBackgroundImage();
 
 		return (
 			<Router>
-				<div className='background-container' img={''}>
+				{/* <ThemeContext.Provider value={theme}> */}
+				<div className='background-container'>
 					<div className='backdrop'>
 						<div className={`app-container ${properCondition}`}>
 							<Header city={city} err={err} isLoading={isLoading} />
@@ -138,21 +157,30 @@ class App extends Component {
 										min={minTemp}
 										sunrise={sunrise}
 										sunset={sunset}
+										hourlyWeather={hourlyWeather}
 									/>
 								)}
 							/>
 							<Route
 								path='/details'
 								component={() => (
-									<DetailsPage humidity={humidity} sunrise={sunrise} sunset={sunset} wind={wind} />
+									<DetailsPage
+										cloudy={cloudy}
+										humidity={humidity}
+										pressure={pressure}
+										sunrise={sunrise}
+										sunset={sunset}
+										wind={wind}
+									/>
 								)}
 							/>
 							<Route path='/alerts' component={() => <AlertsPage lat={lat} lng={lng} />} />
-							<Nav />
+							<Nav properCondition={properCondition} />
 							<Footer />
 						</div>
 					</div>
 				</div>
+				{/* </ThemeContext.Provider> */}
 			</Router>
 		);
 	}

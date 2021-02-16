@@ -1,0 +1,11 @@
+.alerts-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.alerts-section__description {
+	text-align: center;
+	padding: 0 8rem;
+}

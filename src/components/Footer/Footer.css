@@ -1,23 +1,22 @@
-footer {
-	min-height: 6.5rem;
-	padding: 0.5rem 1rem;
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 0.5rem;
 }
 
-footer p {
-	text-align: center;
-	font-size: 1.2rem;
-	font-weight: 100;
+.footer__made-by {
+	font-size: var(--font-size-s);
 }
 
-footer div {
-	font-size: 1.2rem;
-	text-align: center;
+.footer__credits {
+	font-size: var(--font-size-xs);
 }
 
-footer div a {
-	color: white;
+.footer__link {
+	color: inherit;
 }
 
-footer div a:hover {
+.footer__link:hover {
 	color: blueviolet;
 }

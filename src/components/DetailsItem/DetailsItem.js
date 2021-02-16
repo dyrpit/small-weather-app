@@ -12,23 +12,25 @@ const DetailsItem = ({ value, title }) => {
 
 	if (title === 'wind') {
 		suffix = ' km/h';
-	} else if (title === 'humidity') {
+	} else if (title === 'humidity' || title === 'cloudy') {
 		suffix = '%';
 	} else if (title === 'sunrise' || title === 'sunset') {
 		displayedValue = formatTimeFromUnix(value);
+	} else if (title === 'pressure') {
+		suffix = ' hPa';
 	}
 
 	return (
-		<div className='details-item-wrapper'>
-			<div className='details-description'>
-				<img src={icon} alt={title} />
-				<span>{title}</span>
-				<p>
+		<section className='details-section'>
+			<div className='details-section__item'>
+				<img className='details-section__img' src={icon} alt={title} />
+				<span className='details-section__title'>{title}</span>
+				<p className='details-section__value'>
 					{displayedValue}
 					{suffix}
 				</p>
 			</div>
-		</div>
+		</section>
 	);
 };
 

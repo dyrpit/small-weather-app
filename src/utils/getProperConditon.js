@@ -12,7 +12,7 @@ export const getProperCondition = (conditon, sunrise, sunset) => {
 	} else if (rainConditions.includes(conditon)) {
 		return 'rain';
 	} else if (conditon === 'clear') {
-		return isDay(sunrise, sunset) ? 'clear-day' : 'clear-night';
+		return isDay(sunrise, sunset) ? 'clearDay' : 'clearNight';
 	} else {
 		return conditon;
 	}

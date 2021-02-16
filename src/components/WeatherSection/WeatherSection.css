@@ -1,52 +1,48 @@
-.weather-type-img {
-	height: 5rem;
+.weather-section {
+	padding: 0.5rem;
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+}
+
+.weather-section__img {
+	height: var(--font-size-xl);
 	padding-right: 0.5rem;
 	flex-grow: 1;
 }
 
-.weather-type-section {
-	padding: 1rem;
-	display: flex;
-	flex-grow: 1;
-	align-items: center;
-}
-
-.weather-type-section p {
-	font-size: 4rem;
+.weather-section__text {
+	font-size: var(--font-size-l);
 	text-transform: capitalize;
-	line-height: 1.25;
 	flex-grow: 2;
 	text-align: center;
 }
 
-.temp-section {
-	margin-top: 2rem;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+.weather-section--grow {
 	flex-grow: 2;
+	flex-wrap: wrap;
 }
 
-.main-temp-wrapper {
+.weather-section__container {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	flex-grow: 1;
 }
 
-.main-temp-wrapper p {
-	font-size: 14rem;
+.weather-section__main-temp {
+	font-size: var(--font-size-xxl);
 	font-weight: 100;
 }
 
-.max-min-temp-wrapper {
-	padding-right: 2rem;
-	align-self: center;
+.weather-section__aside-temp {
+	font-size: var(--font-size-s);
+	padding: 0.5rem 0;
 }
 
-.max-min-temp-wrapper p {
-	font-size: 2rem;
-	padding: 0.5rem 0;
+.weather-section__aside-temp--border-top {
+	border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .max-min-temp-wrapper p:last-of-type {
@@ -54,39 +50,26 @@
 }
 
 @media (min-width: 450px) {
-	.weather-type-section {
+	.weather-section {
 		justify-content: center;
 	}
 
-	.weather-type-img {
+	.weather-section__img {
 		flex-grow: 0;
 		padding-right: 2rem;
 	}
 
-	.weather-type-section p {
+	.weather-section__text {
 		flex-grow: 0;
-	}
-
-	.max-min-temp-wrapper {
-		padding-right: 6rem;
 	}
 }
 
-/* @media (min-width: 640px) {
-	.weather-type-section {
-		justify-content: center;
+@media (min-width: 640px) {
+	.weather-section__main-temp {
+		font-size: calc(var(--font-size-xxl) * 1.5);
 	}
 
-	.weather-type-img {
-		flex-grow: 0;
-		padding-right: 2rem;
+	.weather-section__aside-temp {
+		font-size: var(--font-size-m);
 	}
-
-	.weather-type-section p {
-		flex-grow: 0;
-	}
-
-	.max-min-temp-wrapper {
-		padding-right: 6rem;
-	}
-} */
+}

@@ -1,47 +1,58 @@
-form {
-	padding: 1rem;
+.search {
+	display: flex;
+	padding: 0.5rem;
 	text-align: center;
+	justify-content: center;
+	align-items: center;
 }
 
-input {
+.search__input {
 	width: 85%;
-	height: 3rem;
-	border: 1px solid white;
-	border-radius: 2rem;
+	height: 2rem;
+	border-width: 1px;
+	border-style: solid;
+	border-color: inherit;
+	border-radius: 0.5rem;
 	background-color: transparent;
-	color: white;
+	color: inherit;
 	outline: none;
-	padding: 0 2rem;
+	padding: 0 1rem;
 	transition: 0.3s;
 }
 
 ::placeholder {
-	color: white;
+	color: inherit;
 }
 
-input:focus {
+.search__input:focus {
 	box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.3);
 }
 
-form button {
+.search__btn {
 	width: 10%;
-	height: 3rem;
+	height: 2rem;
 	margin-left: 5%;
-	font-size: 1.8rem;
+	font-size: var(--font-size-s);
 	background-color: transparent;
 	border: none;
-	color: white;
+	color: inherit;
 	outline: none;
 }
 
 @media (min-width: 450px) {
-	input {
+	.search__input {
 		width: 75%;
 	}
 }
 
-@media (min-width: 600px) {
-	input {
+@media (min-width: 640px) {
+	.search__input {
 		width: 60%;
+		height: 2.5rem;
+		font-size: var(--font-size-s);
+	}
+
+	.search__btn {
+		font-size: var(--font-size-m);
 	}
 }

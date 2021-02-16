@@ -15,14 +15,14 @@ const Header = ({ city, err, isLoading }) => {
 	});
 
 	return (
-		<header className='weather-container'>
-			<div className='city-container'>
+		<header className='header'>
+			<div className='header__container'>
 				{isLoading ? (
 					<Loading />
 				) : (
 					<>
-						<p>{err || city}</p>
-						<p>
+						<p className='header__city-name'>{err || city}</p>
+						<p className='header__date'>
 							{day}, {time}
 						</p>
 					</>

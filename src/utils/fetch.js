@@ -1,9 +1,7 @@
 export const fetchWeather = (location = 'Warsaw', lat, lng) => {
 	let URL = `https://weather-app-dyrpit.herokuapp.com/weather?location=${location}`;
-	// let URL = `http://localhost:5000/weather?location=${location}`;
 	if (lat && lng) {
 		URL = `https://weather-app-dyrpit.herokuapp.com/weather?lat=${lat}&lng=${lng}`;
-		// URL = `http://localhost:5000/weather?lat=${lat}&lng=${lng}`;
 	}
 
 	return fetch(URL)
@@ -26,10 +24,9 @@ export const fetchWeather = (location = 'Warsaw', lat, lng) => {
 		});
 };
 
-export const fetchWeatherAlerts = (lat, lng) => {
+export const fetchWeatherAlerts = (lat, lng, signal) => {
 	const URL = `https://weather-app-dyrpit.herokuapp.com/weather/alerts?lat=${lat}&lng=${lng}`;
-	// const URL = `http://localhost:5000/weather/alerts?lat=${lat}&lng=${lng}`;
-	return fetch(URL)
+	return fetch(URL, signal)
 		.then((response) => {
 			if (!response.ok) {
 				throw new Error(response.status);
@@ -50,6 +47,35 @@ export const fetchWeatherAlerts = (lat, lng) => {
 		.catch((e) => {
 			if (e.message === '400') {
 				throw new Error('No alerts for this city');
+			}
+
+			throw new Error(e.message);
+		});
+};
+
+export const fetchWeatherHourly = (lat, lng) => {
+	const URL = `https://weather-app-dyrpit.herokuapp.com/weather/hourly?lat=${lat}&lng=${lng}`;
+	return fetch(URL)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(response.status);
+			}
+			return response;
+		})
+		.then((res) => {
+			return res.json();
+		})
+		.then((res) => {
+			const { hourly } = res;
+			if (!hourly) {
+				return null;
+			}
+
+			return hourly;
+		})
+		.catch((e) => {
+			if (e.message === '400') {
+				throw new Error('No hourly weather for this city');
 			}
 
 			throw new Error(e.message);
