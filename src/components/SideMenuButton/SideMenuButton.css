@@ -1,0 +1,10 @@
+.side-menu-button {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+}
+
+.side-menu-button__icon {
+	font-size: var(--font-size-sm);
+}

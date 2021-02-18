@@ -6,7 +6,9 @@ import DetailsPage from '../DetailsPage/DetailsPage';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
+import PollutionPage from '../PollutionPage/PollutionPage';
 import Searchbar from '../Searchbar/Searchbar';
+import SideMenu from '../SideMenu/SideMenu';
 import WeatherSection from '../WeatherSection/WeatherSection';
 
 // import { ThemeContext, colors } from '../../context/themeContext';
@@ -18,7 +20,7 @@ import './App.css';
 class App extends Component {
 	//TODO1: add debouce to reduce input onchange refresh, minimize child re-renders
 	//TODO2: add theme to switch for dark mode
-	//TODO3: add prop types
+	//TODO3: add setting to change units and adding favourite cities
 	state = {
 		value: '',
 		temp: '',
@@ -34,15 +36,21 @@ class App extends Component {
 		sunrise: '',
 		sunset: '',
 		err: false,
+		errMessage: '',
 		lat: '',
 		lng: '',
 		isLoading: false,
 		hourlyWeather: null,
+		favouriteCities: null,
 	};
 
 	handleInputChange = (e) => {
 		const { value } = e.target;
 		this.setState({ value });
+	};
+
+	handleFavouriteCitiesChange = (favouriteCities) => {
+		this.setState({ favouriteCities });
 	};
 
 	handleSubmit = async (e) => {
@@ -82,6 +90,7 @@ class App extends Component {
 					lng,
 					lat,
 					err: false,
+					errMessage: '',
 					width: null,
 					hourlyWeather: null,
 				});
@@ -100,7 +109,7 @@ class App extends Component {
 				}
 			}
 		} catch (e) {
-			this.setState({ err: e.message, isLoading: false });
+			this.setState({ err: true, errMessage: e.message, isLoading: false });
 		}
 	};
 
@@ -108,6 +117,11 @@ class App extends Component {
 		navigator.geolocation.getCurrentPosition((position) => {
 			this.getWeather(undefined, position.coords.latitude, position.coords.longitude);
 		});
+		const favouriteCities = JSON.parse(localStorage.getItem('cities'));
+
+		if (favouriteCities) {
+			this.handleFavouriteCitiesChange(favouriteCities);
+		}
 	}
 
 	render() {
@@ -115,7 +129,8 @@ class App extends Component {
 			city,
 			conditions,
 			cloudy,
-			err,
+			// err,
+			errMessage,
 			humidity,
 			lat,
 			lng,
@@ -129,7 +144,10 @@ class App extends Component {
 			wind,
 			isLoading,
 			hourlyWeather,
+			favouriteCities,
 		} = this.state;
+
+		console.log(favouriteCities);
 
 		const properCondition = getProperCondition(conditions, sunrise, sunset);
 
@@ -137,9 +155,21 @@ class App extends Component {
 			<Router>
 				{/* <ThemeContext.Provider value={theme}> */}
 				<div className='background-container'>
+					<SideMenu
+						favouriteCities={favouriteCities}
+						getWeather={this.getWeather}
+						handleFavouriteCitiesChange={this.handleFavouriteCitiesChange}
+					/>
 					<div className='backdrop'>
 						<div className={`app-container ${properCondition}`}>
-							<Header city={city} err={err} isLoading={isLoading} />
+							<Header
+								city={city}
+								err={errMessage}
+								isLoading={isLoading}
+								lat={lat}
+								lng={lng}
+								handleFavouriteCitiesChange={this.handleFavouriteCitiesChange}
+							/>
 							<Searchbar
 								handleInputChange={this.handleInputChange}
 								handleSubmit={this.handleSubmit}
@@ -175,6 +205,7 @@ class App extends Component {
 								)}
 							/>
 							<Route path='/alerts' component={() => <AlertsPage lat={lat} lng={lng} />} />
+							<Route path='/pollution' component={() => <PollutionPage />} />
 							<Nav properCondition={properCondition} />
 							<Footer />
 						</div>

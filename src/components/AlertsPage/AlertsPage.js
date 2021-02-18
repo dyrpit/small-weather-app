@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Container from '../Container/Container';
 import HomeButton from '../HomeButton/HomeButton';
@@ -52,6 +53,11 @@ const AlertsPage = ({ lat, lng }) => {
 			</div>
 		</Container>
 	);
+};
+
+AlertsPage.propTypes = {
+	lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default AlertsPage;

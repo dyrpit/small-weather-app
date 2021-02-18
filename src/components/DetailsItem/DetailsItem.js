@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { formatTimeFromUnix } from '../../utils/formatTimeFromUnix';
 import { getProperImage } from '../../utils/getImage';
@@ -32,6 +33,11 @@ const DetailsItem = ({ value, title }) => {
 			</div>
 		</section>
 	);
+};
+
+DetailsItem.propTypes = {
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	title: PropTypes.string,
 };
 
 export default DetailsItem;

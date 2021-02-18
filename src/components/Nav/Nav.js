@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import alert from '../../svg/alert.svg';
 import details from '../../svg/info.svg';
@@ -37,6 +38,10 @@ const Nav = ({ properCondition }) => {
 			</div>
 		</nav>
 	);
+};
+
+Nav.propTypes = {
+	properCondition: PropTypes.string,
 };
 
 export default Nav;

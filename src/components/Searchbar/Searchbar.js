@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Searchbar.css';
 
@@ -17,6 +18,12 @@ const Searchbar = ({ handleInputChange, value, handleSubmit }) => {
 			</button>
 		</form>
 	);
+};
+
+Searchbar.propTypes = {
+	handleInputChange: PropTypes.func,
+	handleSubmit: PropTypes.func,
+	value: PropTypes.string,
 };
 
 export default Searchbar;

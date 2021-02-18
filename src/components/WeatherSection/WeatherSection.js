@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Container from '../Container/Container';
 import WeatherHourly from '../WeatherHourly/WeatherHourly';
@@ -43,6 +44,17 @@ const WeatherSection = ({
 			<WeatherHourly hourlyWeather={hourlyWeather} />
 		</Container>
 	);
+};
+
+WeatherSection.propTypes = {
+	conditions: PropTypes.string,
+	max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	temp: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	sunrise: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	sunset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	weather: PropTypes.string,
+	hourlyWeather: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default WeatherSection;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { formatTimeFromUnix } from '../../utils/formatTimeFromUnix';
 import { getProperImage } from '../../utils/getImage';
@@ -22,6 +23,10 @@ const WeatherItem = ({ itemWeather }) => {
 			<p className='weather-item__text'>{temp.toFixed()}&#176;</p>
 		</div>
 	);
+};
+
+WeatherItem.propTypes = {
+	itemWeather: PropTypes.object,
 };
 
 export default WeatherItem;

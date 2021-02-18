@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import WeatherItem from '../WeatherItem/WeatherItem';
 
@@ -82,6 +83,10 @@ const WeatherHourly = ({ hourlyWeather }) => {
 			</button>
 		</div>
 	);
+};
+
+WeatherHourly.propTypes = {
+	hourlyWeather: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default WeatherHourly;

@@ -1,0 +1,45 @@
+.side-menu {
+	color: black;
+}
+
+.side-menu__background {
+	display: none;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 2;
+}
+
+.side-menu__panel {
+	position: fixed;
+	height: 100%;
+	width: 65vw;
+	top: 0;
+	left: -65vw;
+	padding: 3rem 2rem 2rem 1rem;
+	background-color: white;
+	border-radius: 0% 25% 25% 0%;
+	transition: 0.3s;
+	z-index: 2;
+}
+
+.side-menu--is-open {
+	display: block;
+}
+
+.side-menu__panel--is-open {
+	left: 0;
+}
+
+.settings {
+	position: absolute;
+	right: 20%;
+	top: 3%;
+}
+.settings__icon {
+	font-size: var(--font-size-s);
+	color: black;
+}

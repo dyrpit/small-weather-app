@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Container from '../Container/Container';
 import DetailsItem from '../DetailsItem/DetailsItem';
@@ -17,6 +18,10 @@ const DetailsPage = (props) => {
 			))}
 		</Container>
 	);
+};
+
+DetailsPage.propTypes = {
+	props: PropTypes.object,
 };
 
 export default DetailsPage;
