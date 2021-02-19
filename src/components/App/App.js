@@ -152,7 +152,7 @@ class App extends Component {
 		const properCondition = getProperCondition(conditions, sunrise, sunset);
 
 		return (
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				{/* <ThemeContext.Provider value={theme}> */}
 				<div className='background-container'>
 					<SideMenu
