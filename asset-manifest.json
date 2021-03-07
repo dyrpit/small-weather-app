@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/small-weather-app/static/css/main.4f4b62e3.chunk.css",
-    "main.js": "/small-weather-app/static/js/main.441ddc09.chunk.js",
-    "main.js.map": "/small-weather-app/static/js/main.441ddc09.chunk.js.map",
+    "main.css": "/small-weather-app/static/css/main.33eed10a.chunk.css",
+    "main.js": "/small-weather-app/static/js/main.b27b1d87.chunk.js",
+    "main.js.map": "/small-weather-app/static/js/main.b27b1d87.chunk.js.map",
     "runtime-main.js": "/small-weather-app/static/js/runtime-main.2f0887e8.js",
     "runtime-main.js.map": "/small-weather-app/static/js/runtime-main.2f0887e8.js.map",
-    "static/js/2.b774d74e.chunk.js": "/small-weather-app/static/js/2.b774d74e.chunk.js",
-    "static/js/2.b774d74e.chunk.js.map": "/small-weather-app/static/js/2.b774d74e.chunk.js.map",
+    "static/js/2.b4f00ce8.chunk.js": "/small-weather-app/static/js/2.b4f00ce8.chunk.js",
+    "static/js/2.b4f00ce8.chunk.js.map": "/small-weather-app/static/js/2.b4f00ce8.chunk.js.map",
     "index.html": "/small-weather-app/index.html",
-    "precache-manifest.fa1661a2be2ac3ff6577670d7b131df4.js": "/small-weather-app/precache-manifest.fa1661a2be2ac3ff6577670d7b131df4.js",
+    "precache-manifest.6f69379a4c470fb17672bacd55ba2eb3.js": "/small-weather-app/precache-manifest.6f69379a4c470fb17672bacd55ba2eb3.js",
     "service-worker.js": "/small-weather-app/service-worker.js",
-    "static/css/main.4f4b62e3.chunk.css.map": "/small-weather-app/static/css/main.4f4b62e3.chunk.css.map",
-    "static/js/2.b774d74e.chunk.js.LICENSE.txt": "/small-weather-app/static/js/2.b774d74e.chunk.js.LICENSE.txt",
+    "static/css/main.33eed10a.chunk.css.map": "/small-weather-app/static/css/main.33eed10a.chunk.css.map",
+    "static/js/2.b4f00ce8.chunk.js.LICENSE.txt": "/small-weather-app/static/js/2.b4f00ce8.chunk.js.LICENSE.txt",
     "static/media/alert.svg": "/small-weather-app/static/media/alert.c5038101.svg",
     "static/media/ash.svg": "/small-weather-app/static/media/ash.a3e50ba0.svg",
-    "static/media/App.css": "/small-weather-app/static/media/bled.1f6249b8.jpg",
+    "static/media/BackgroundContainer.css": "/small-weather-app/static/media/japan.de1799c1.jpg",
     "static/media/clear-day.svg": "/small-weather-app/static/media/clear-day.51456abb.svg",
     "static/media/clear-night.svg": "/small-weather-app/static/media/clear-night.6c056b1e.svg",
     "static/media/clouds.svg": "/small-weather-app/static/media/clouds.a406d4cc.svg",
@@ -36,8 +36,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.2f0887e8.js",
-    "static/js/2.b774d74e.chunk.js",
-    "static/css/main.4f4b62e3.chunk.css",
-    "static/js/main.441ddc09.chunk.js"
+    "static/js/2.b4f00ce8.chunk.js",
+    "static/css/main.33eed10a.chunk.css",
+    "static/js/main.b27b1d87.chunk.js"
   ]
 }
