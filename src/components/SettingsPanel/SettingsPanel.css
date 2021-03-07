@@ -1,0 +1,40 @@
+.panel__btn-container {
+	display: flex;
+	align-items: center;
+}
+
+.panel__btn {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 25px;
+	margin: 0 0.5rem;
+	background: none;
+	outline: none;
+	position: relative;
+	height: 2rem;
+	width: 4rem;
+	cursor: pointer;
+}
+
+.panel__btn::before {
+	content: '';
+	display: block;
+	height: 1.5rem;
+	width: 1.5rem;
+	background-color: black;
+	border-radius: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+	position: absolute;
+	transition: 0.5s;
+}
+
+.panel__btn--dark::before {
+	left: 0.2rem;
+	background-color: white;
+}
+
+.panel__btn--light::before {
+	left: 2.2rem;
+	background-color: black;
+}

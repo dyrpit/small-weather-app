@@ -6,7 +6,6 @@ import './SideMenuButton.css';
 const SideMenuButton = ({ toggleMenu }) => {
 	return (
 		<div onClick={toggleMenu} className='side-menu-button'>
-			{/* <i className='fas fa-bars side-menu-button__icon'></i> */}
 			<i className='fas fa-ellipsis-v side-menu-button__icon'></i>
 		</div>
 	);

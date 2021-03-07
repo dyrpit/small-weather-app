@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -8,10 +8,15 @@ import logo from '../../images/logo512.png';
 import pollution from '../../svg/co2.svg';
 
 import './Nav.css';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const Nav = ({ properCondition }) => {
+	const { theme } = useContext(ThemeContext);
+
+	const style = theme === 'dark' ? 'dark' : properCondition;
+
 	return (
-		<nav className={`menu ${properCondition}`}>
+		<nav className={`menu menu--${style}`}>
 			<ul className='menu__list'>
 				<li className='menu__item'>
 					<Link className='menu__link' to='/pollution'>

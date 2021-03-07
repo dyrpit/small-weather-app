@@ -36,7 +36,7 @@ const weatherImages = {
 	wind,
 };
 
-export const getProperImage = (conditions, sunRise, sunSet) => {
+export const getProperImage = (conditions = '', sunRise, sunSet) => {
 	if (conditions.includes('clear')) {
 		return isDay(sunRise, sunSet) ? weatherImages['clearDay'] : weatherImages['clearNight'];
 	} else {

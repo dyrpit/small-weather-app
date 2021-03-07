@@ -1,65 +1,39 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AlertsPage from '../AlertsPage/AlertsPage';
+import AppContainer from '../AppContainer/AppConatiner';
+import BackgroundContainer from '../BackgroundContainer/BackgroundContainer';
 import DetailsPage from '../DetailsPage/DetailsPage';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Loading from '../Loading/Loading';
 import Nav from '../Nav/Nav';
 import PollutionPage from '../PollutionPage/PollutionPage';
 import Searchbar from '../Searchbar/Searchbar';
 import SideMenu from '../SideMenu/SideMenu';
 import WeatherSection from '../WeatherSection/WeatherSection';
 
-// import { ThemeContext, colors } from '../../context/themeContext';
 import { fetchWeather, fetchWeatherHourly } from '../../utils/fetch';
 import { getProperCondition } from '../../utils/getProperConditon';
 
+import ThemeProvider from '../../context/ThemeProvider';
+
 import './App.css';
 
-class App extends Component {
-	//TODO1: add debouce to reduce input onchange refresh, minimize child re-renders
-	//TODO2: add theme to switch for dark mode
-	//TODO3: add setting to change units and adding favourite cities
-	state = {
-		value: '',
-		temp: '',
-		humidity: '',
-		maxTemp: '',
-		minTemp: '',
-		pressure: '',
-		wind: '',
-		conditions: '',
-		conditionsDescription: '',
-		city: '',
-		cloudy: '',
-		sunrise: '',
-		sunset: '',
-		err: false,
-		errMessage: '',
-		lat: '',
-		lng: '',
-		isLoading: false,
-		hourlyWeather: null,
-		favouriteCities: null,
-	};
+const App = () => {
+	//TODO1: add setting to change units
+	const [isLoading, setIsLoading] = useState(true);
+	const [weatherData, setWeatherData] = useState(null);
+	const [hourlyWeatherData, setHourlyWeatherData] = useState(null);
+	const [errMessage, setErrMessage] = useState('');
+	const [properCondition, setProperConditions] = useState('');
+	const [initialLoading, setInitialLoading] = useState(true);
 
-	handleInputChange = (e) => {
-		const { value } = e.target;
-		this.setState({ value });
-	};
+	const getWeather = async (location, lat, lng) => {
+		setIsLoading(true);
+		!weatherData ? setInitialLoading(true) : setInitialLoading(false);
 
-	handleFavouriteCitiesChange = (favouriteCities) => {
-		this.setState({ favouriteCities });
-	};
-
-	handleSubmit = async (e) => {
-		e.preventDefault();
-		this.getWeather(this.state.value);
-	};
-
-	getWeather = async (location, lat, lng) => {
-		this.setState({ isLoading: true });
 		try {
 			const weatherData = await fetchWeather(location, lat, lng);
 
@@ -74,7 +48,7 @@ class App extends Component {
 					weather: [{ main, description }],
 				} = weatherData;
 
-				this.setState({
+				setWeatherData({
 					temp: Number(temp.toFixed()),
 					maxTemp: Number(temp_max.toFixed()),
 					minTemp: Number(temp_min.toFixed()),
@@ -89,10 +63,6 @@ class App extends Component {
 					sunset,
 					lng,
 					lat,
-					err: false,
-					errMessage: '',
-					width: null,
-					hourlyWeather: null,
 				});
 
 				const hourlyWeatherData = await fetchWeatherHourly(
@@ -100,121 +70,96 @@ class App extends Component {
 					weatherData.coord.lon
 				);
 
-				this.setState({ isLoading: false });
+				setIsLoading(false);
+				setInitialLoading(false);
 
 				if (hourlyWeatherData) {
-					this.setState({
-						hourlyWeather: hourlyWeatherData,
-					});
+					setHourlyWeatherData(hourlyWeatherData);
 				}
 			}
 		} catch (e) {
-			this.setState({ err: true, errMessage: e.message, isLoading: false });
+			setIsLoading(false);
+			setErrMessage(e.message);
 		}
 	};
 
-	componentDidMount() {
+	useEffect(() => {
 		navigator.geolocation.getCurrentPosition((position) => {
-			this.getWeather(undefined, position.coords.latitude, position.coords.longitude);
+			getWeather(undefined, position.coords.latitude, position.coords.longitude);
 		});
-		const favouriteCities = JSON.parse(localStorage.getItem('cities'));
+	}, []);
 
-		if (favouriteCities) {
-			this.handleFavouriteCitiesChange(favouriteCities);
-		}
-	}
-
-	render() {
-		const {
-			city,
-			conditions,
-			cloudy,
-			// err,
-			errMessage,
-			humidity,
-			lat,
-			lng,
-			maxTemp,
-			minTemp,
-			pressure,
-			sunrise,
-			sunset,
-			temp,
-			value,
-			wind,
-			isLoading,
-			hourlyWeather,
-			favouriteCities,
-		} = this.state;
-
-		console.log(favouriteCities);
-
-		const properCondition = getProperCondition(conditions, sunrise, sunset);
-
-		return (
-			<Router basename={process.env.PUBLIC_URL}>
-				{/* <ThemeContext.Provider value={theme}> */}
-				<div className='background-container'>
-					<SideMenu
-						favouriteCities={favouriteCities}
-						getWeather={this.getWeather}
-						handleFavouriteCitiesChange={this.handleFavouriteCitiesChange}
-					/>
-					<div className='backdrop'>
-						<div className={`app-container ${properCondition}`}>
-							<Header
-								city={city}
-								err={errMessage}
-								isLoading={isLoading}
-								lat={lat}
-								lng={lng}
-								handleFavouriteCitiesChange={this.handleFavouriteCitiesChange}
-							/>
-							<Searchbar
-								handleInputChange={this.handleInputChange}
-								handleSubmit={this.handleSubmit}
-								value={value}
-							/>
-							<Route
-								exact
-								path='/'
-								component={() => (
-									<WeatherSection
-										conditions={properCondition}
-										weather={conditions}
-										temp={temp}
-										max={maxTemp}
-										min={minTemp}
-										sunrise={sunrise}
-										sunset={sunset}
-										hourlyWeather={hourlyWeather}
-									/>
-								)}
-							/>
-							<Route
-								path='/details'
-								component={() => (
-									<DetailsPage
-										cloudy={cloudy}
-										humidity={humidity}
-										pressure={pressure}
-										sunrise={sunrise}
-										sunset={sunset}
-										wind={wind}
-									/>
-								)}
-							/>
-							<Route path='/alerts' component={() => <AlertsPage lat={lat} lng={lng} />} />
-							<Route path='/pollution' component={() => <PollutionPage />} />
-							<Nav properCondition={properCondition} />
-							<Footer />
-						</div>
-					</div>
-				</div>
-				{/* </ThemeContext.Provider> */}
-			</Router>
+	useEffect(() => {
+		const properCondition = getProperCondition(
+			weatherData?.conditions,
+			weatherData?.sunrise,
+			weatherData?.sunset
 		);
-	}
-}
+
+		setProperConditions(properCondition);
+	}, [weatherData]);
+
+	return (
+		<Router basename={process.env.PUBLIC_URL}>
+			<ThemeProvider>
+				<BackgroundContainer>
+					{initialLoading ? (
+						<Loading main={true} />
+					) : (
+						<>
+							<SideMenu getWeather={getWeather} />
+							<AppContainer properCondition={properCondition}>
+								<Header
+									city={weatherData.city}
+									err={errMessage}
+									isLoading={isLoading}
+									lat={weatherData.lat}
+									lng={weatherData.lng}
+								/>
+								<Searchbar getWeather={getWeather} />
+								<Route
+									exact
+									path='/'
+									component={() => (
+										<WeatherSection
+											conditions={properCondition}
+											weather={weatherData.conditions}
+											temp={weatherData.temp}
+											max={weatherData.maxTemp}
+											min={weatherData.minTemp}
+											sunrise={weatherData.sunrise}
+											sunset={weatherData.sunset}
+											hourlyWeather={hourlyWeatherData}
+										/>
+									)}
+								/>
+								<Route
+									path='/details'
+									component={() => (
+										<DetailsPage
+											cloudy={weatherData.cloudy}
+											humidity={weatherData.humidity}
+											pressure={weatherData.pressure}
+											sunrise={weatherData.sunrise}
+											sunset={weatherData.sunset}
+											wind={weatherData.wind}
+										/>
+									)}
+								/>
+								<Route
+									path='/alerts'
+									component={() => <AlertsPage lat={weatherData.lat} lng={weatherData.lng} />}
+								/>
+								<Route path='/pollution' component={() => <PollutionPage />} />
+								<Nav properCondition={properCondition} />
+								<Footer />
+							</AppContainer>
+						</>
+					)}
+				</BackgroundContainer>
+			</ThemeProvider>
+		</Router>
+	);
+};
 
 export default App;

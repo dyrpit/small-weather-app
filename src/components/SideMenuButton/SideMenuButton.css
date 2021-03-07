@@ -1,8 +1,9 @@
 .side-menu-button {
 	position: absolute;
-	top: 10px;
+	top: 15px;
 	left: 10px;
 	z-index: 1;
+	cursor: pointer;
 }
 
 .side-menu-button__icon {

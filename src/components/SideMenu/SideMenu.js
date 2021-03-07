@@ -1,51 +1,53 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import LocationsPanel from '../LocationsPanel/LocationsPanel';
 import SideMenuButton from '../SideMenuButton/SideMenuButton';
+import SettingsPanel from '../SettingsPanel/SettingsPanel';
+
+import { ThemeContext } from '../../context/ThemeProvider';
 
 import './SideMenu.css';
 
-const SideMenu = ({ favouriteCities, getWeather, handleFavouriteCitiesChange }) => {
+const SideMenu = ({ getWeather }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isSettingOpen, setIsSettingOpen] = useState(false);
+
+	const { theme } = useContext(ThemeContext);
 
 	const toggleMenu = () => {
 		setIsOpen((prevState) => !prevState);
+		setIsSettingOpen(false);
 	};
 
-	const handleRemoveFromStorage = (id) => {
-		let favouriteCities = JSON.parse(localStorage.getItem('cities'));
-		console.log(id);
-
-		favouriteCities = favouriteCities.filter((city, index) => index !== id);
-
-		localStorage.setItem('cities', JSON.stringify(favouriteCities));
-		handleFavouriteCitiesChange(favouriteCities);
+	const toggleSettings = () => {
+		setIsSettingOpen((prevState) => !prevState);
 	};
 
-	const openedSideMenu = isOpen ? 'side-menu--is-open' : '';
-	const openedSidePanel = isOpen ? 'side-menu__panel--is-open' : '';
+	const isPanelOpen = isOpen ? 'is-open' : '';
 
 	return (
 		<>
 			<div className='side-menu'>
-				<div onClick={toggleMenu} className={`side-menu__background ${openedSideMenu}`}></div>
-				{/* onClick={toggleMenu} */}
-				<div className={`side-menu__panel ${openedSidePanel}`}>
-					<div className='settings'>
-						<i className='fas fa-cog settings__icon'></i>
+				<div
+					onClick={toggleMenu}
+					className={`side-menu__background side-menu--${isPanelOpen} `}
+				></div>
+				<div
+					className={`side-menu__panel side-menu__panel--${isPanelOpen} side-menu__panel--${theme}`}
+				>
+					<div onClick={toggleMenu} className='side-menu__close-button'>
+						<i className='fas fa-times'></i>
 					</div>
-					<h3 className='panel__title'>Favourite locations</h3>
-					<ul className='panel__city-list'>
-						{favouriteCities &&
-							favouriteCities.map(({ city, lat, lng }, id) => (
-								<div key={city + id}>
-									<p onClick={() => getWeather(city, lat, lng)}>{city}</p>
-									<p onClick={() => handleRemoveFromStorage(id)}>
-										<i className='far fa-trash-alt'></i>
-									</p>
-								</div>
-							))}
-					</ul>
+
+					<div onClick={toggleSettings} className='settings'>
+						{isSettingOpen ? (
+							<i className='fas fa-city'></i>
+						) : (
+							<i className='fas fa-cog settings__icon'></i>
+						)}
+					</div>
+					{isSettingOpen ? <SettingsPanel /> : <LocationsPanel getWeather={getWeather} />}
 				</div>
 			</div>
 			<SideMenuButton toggleMenu={toggleMenu} />
@@ -54,9 +56,7 @@ const SideMenu = ({ favouriteCities, getWeather, handleFavouriteCitiesChange }) 
 };
 
 SideMenu.propTypes = {
-	favouriteCities: PropTypes.array,
 	getWeather: PropTypes.func,
-	handleFavouriteCitiesChange: PropTypes.func,
 };
 
 export default SideMenu;

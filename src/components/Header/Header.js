@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Loading from '../Loading/Loading';
 
+import { ThemeContext } from '../../context/ThemeProvider';
+
 import './Header.css';
 
-const Header = ({ city, err, isLoading, handleFavouriteCitiesChange, lat, lng }) => {
+const Header = ({ city, err, isLoading, lat, lng }) => {
+	const { addToStorage, theme } = useContext(ThemeContext);
+
 	const day = new Date().toLocaleDateString(undefined, {
 		weekday: 'short',
 	});
@@ -16,30 +20,17 @@ const Header = ({ city, err, isLoading, handleFavouriteCitiesChange, lat, lng })
 	});
 
 	const handleAddToStorage = () => {
-		console.log(city, lng, lat);
 		const cityLocation = {
 			city,
 			lng,
 			lat,
 		};
 
-		const cityStorage = localStorage.getItem('cities');
-
-		if (!cityStorage) {
-			const dataToSave = JSON.stringify(Array.of(cityLocation));
-			localStorage.setItem('cities', dataToSave);
-			handleFavouriteCitiesChange(dataToSave);
-			return;
-		}
-
-		const data = JSON.parse(cityStorage);
-		data.push(cityLocation);
-		localStorage.setItem('cities', JSON.stringify(data));
-		handleFavouriteCitiesChange(data);
+		addToStorage(cityLocation);
 	};
 
 	return (
-		<header className='header'>
+		<header className={`header ${theme}`}>
 			<div className='header__container'>
 				{isLoading ? (
 					<Loading />
@@ -67,6 +58,8 @@ Header.propTypes = {
 	city: PropTypes.string,
 	err: PropTypes.string,
 	isLoading: PropTypes.bool,
+	lat: PropTypes.number,
+	lng: PropTypes.number,
 };
 
 export default Header;

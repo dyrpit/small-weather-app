@@ -37,6 +37,7 @@
 	border: none;
 	color: inherit;
 	outline: none;
+	cursor: pointer;
 }
 
 @media (min-width: 450px) {

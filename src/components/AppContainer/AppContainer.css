@@ -1,0 +1,55 @@
+.app-container {
+	min-height: 100vh;
+	max-width: 50rem;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin: 0 auto;
+	box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+	transition: 0.3s;
+}
+
+.app-container--thunderstorm {
+	background: var(--thunderstorm);
+}
+
+.app-container--snow {
+	background: var(--snow);
+}
+
+.app-container--clearDay {
+	background: var(--clearDay);
+}
+
+.app-container--clearNight {
+	background: var(--clearNight);
+}
+
+.app-container--clouds {
+	background: var(--clouds);
+}
+
+.app-container--rain {
+	background: var(--rain);
+}
+
+.app-container--sand {
+	background: var(--sand);
+}
+
+.app-container--tornado {
+	background: var(--tornado);
+}
+
+.app-container--mist {
+	background: var(--mist);
+}
+
+.app-container--ash {
+	background: var(--ash);
+}
+
+.app-container--dark {
+	color: white;
+	background-color: #111;
+}

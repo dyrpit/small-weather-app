@@ -1,0 +1,14 @@
+.loading {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading__text {
+	font-size: var(--font-size-m);
+}
+
+.main {
+	height: 100vh;
+}

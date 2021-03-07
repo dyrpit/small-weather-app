@@ -1,0 +1,18 @@
+.background-container {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.backdrop {
+	width: 100%;
+	backdrop-filter: blur(4px) brightness(0.95);
+}
+
+.background-container--dark {
+	background-image: url('../../images/japan.jpg');
+}
+
+.background-container--light {
+	background-image: url('../../images/bled.jpg');
+}

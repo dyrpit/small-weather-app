@@ -1,0 +1,20 @@
+.city-item {
+	display: flex;
+	padding: 1rem;
+	border-bottom: 1px solid;
+	border-color: inherit;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.city-item--dark:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.city-item--light:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.city-item__name {
+	flex-grow: 1;
+}
